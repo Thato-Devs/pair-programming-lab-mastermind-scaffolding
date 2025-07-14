@@ -1,4 +1,5 @@
 // https://jsdoc.app
+// Thato & Terrance
 /**
  * @function checkGuess
  * Checks guess for "mastermind" game against solution
@@ -18,21 +19,37 @@
  *
  */
 function checkGuess(guess, solution) {
-  // TODO: complete this function
-  // first determine how many characters total the two strings have in common
-  // This may help:
-  // https://github.com/bonnie/udemy-ENZYME/blob/master/context-base/src/helpers/index.js
-  //
-  // then determine how many of those characters are in the right place
-  // hint: iterate through characters of guess and compare to character
-  // in the same position in solution
-  //
-  // finally, return a string in the format
-  // "count of correct characters in the right place"-"count of correct
-  // characters not in the right place"
-  // for example, "2-1"
-  //
+  let rightPlace = 0;
+  let wrongPlace = 0;
+
+  const guessArr = guess.split('');
+  const solutionArr = solution.split('');
+
+  // Step 1: Track which positions matched
+  const unmatchedGuess = [];
+  const unmatchedSolution = [];
+
+  for (let i = 0; i < guessArr.length; i++) {
+    if (guessArr[i] === solutionArr[i]) {
+      rightPlace++;
+    } else {
+      unmatchedGuess.push(guessArr[i]);
+      unmatchedSolution.push(solutionArr[i]);
+    }
+  }
+
+  // Step 2: Count characters in the wrong place
+  unmatchedGuess.forEach(char => {
+    const index = unmatchedSolution.indexOf(char);
+    if (index !== -1) {
+      wrongPlace++;
+      unmatchedSolution.splice(index, 1); // Remove matched char so it's not reused
+    }
+  });
+
+  return `${rightPlace}-${wrongPlace}`;
 }
+
 
 // https://jsdoc.app
 /**
