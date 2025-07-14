@@ -22,6 +22,7 @@ function checkGuess(guess, solution) {
   let rightPlace = 0;
   let wrongPlace = 0;
 
+  // Convert strings to arrays for easier manipulation
   const guessArr = guess.split('');
   const solutionArr = solution.split('');
 
